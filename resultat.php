@@ -6,7 +6,9 @@
     <title>Resultat</title>
 </head>
 <body>
-    <h1>INSERCCIÓ CORRECTE</h1>
+    
+    <h1>INSERCCIÓ CORRECTE A LA BBDD USERS</h1>
+    
 
 </body>
 </html>
