@@ -8,7 +8,7 @@
 <body>
     
     <h1>Tu has insertat usuari correcta</h1>
-
+    <a href = "login.html">iniciar sessio</a>
 
 
 
