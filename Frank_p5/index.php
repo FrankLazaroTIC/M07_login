@@ -25,7 +25,7 @@
 
     else{
         //FEM UN SELECT PER RETORNAR TOTS ELS USERS
-        $query = "INSERT INTO `1` (`user_id`, `name`, `surname`, `password`, `email`, `rol`, `active`) 
+        $query = "INSERT INTO `user` (`user_id`, `name`, `surname`, `password`, `email`, `rol`, `active`) 
         VALUES ('$user_id', '$name', '$surname', '$password', '$email', '$rol', '$active')";
         
         $user= mysqli_query($connect, $query);

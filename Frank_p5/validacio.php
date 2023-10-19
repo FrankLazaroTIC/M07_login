@@ -9,15 +9,23 @@
         $remember = isset($_POST["remember"]) ? 1 : 0; // VERIFICA SI ESTA MARCAT
     }
 
+    function consultaUsuaris($connect, $query){
+        $llistaResult = mysqli_query($connect, $query);
+        
+        return $llistaResult;
+    }
+
+
+
     //CONNEXIÓ BBDD
     $connect = mysqli_connect(DB_HOST, DB_USER, DB_PSW, DB_NAME, DB_PORT);
-
+    
     //CODI PER VERIFICAR LA CONNEXIÓ
     if (!$connect) {
         echo "Error de conexión: " . mysqli_connect_error();
     } else {
         //FEM LA CONSULTA SQL PER BUSCAR L'USUARI PER BUSCAR AMB LES DADES EMAIL I PASSWORD PER FER LA VALIDACIÓ DEL LOGIN
-        $query = "SELECT `name`, `surname`, `email`, `password` FROM `1` WHERE `email` = '$email' AND `password` = '$password'";
+        $query = "SELECT `name`, `surname`, `email`, `password`, `rol` FROM `user` WHERE `email` = '$email' AND `password` = '$password'";
         $result = mysqli_query($connect, $query);
 
         if (!$result) {
@@ -34,7 +42,7 @@
                     echo "Email: " . $user["email"] . "<br>";
                 } else {
                     //FEM UN ALTRE CONSULTA PER MOSTRAR LA LLISTA DE TOTS ELS USUARIS O NOMES FEM SELECT DEL NOM I COGNOM
-                    $llistaQuery = "SELECT `name`, `surname` FROM `1` ";
+                    $llistaQuery = "SELECT `name`, `surname` FROM `user` ";
                     $llistaResult = mysqli_query($connect, $llistaQuery);
 
                     //SI LA CONSULTA ES CORRECTA MOSTREM LES DADES DELS USUARIS
@@ -42,11 +50,13 @@
                         echo "Hola " . $user["name"] . ", ets professor!!<br>";
                         echo "La llista d'usuaris de les bases de dades és: <br>";
                         //UTILITZEM EL FOREACH ON RECORREM LA LLISTA QUE ENS RETORNA LA CONSULTA I ANEM MOSTRANT-LA
-                        foreach ($llistaResult as $usuaris) {
+                        //////////////////////////////////////////////////////////////////////////////
+                        foreach (consultaUsuaris($connect,$llistaQuery) as $usuaris) {
                             echo "Nom: " . $usuaris["name"] . " i cognom:". $usuaris["surname"] . "<br>";
                         }
+                        /////////////////////////////////////////////////////////////////////////////
                     } else {
-                        echo "Error al obtenir la lista de d'usuaris: " . mysqli_error($connect);
+                        echo "Error al obtenir la llista de d'usuaris: " . mysqli_error($connect);
                     }
                 }
             } else {
