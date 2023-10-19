@@ -46,7 +46,7 @@
                             echo "Nom: " . $usuaris["name"] . " i cognom:". $usuaris["surname"] . "<br>";
                         }
                     } else {
-                        echo "Error al obtenir la lista de profesors: " . mysqli_error($connect);
+                        echo "Error al obtenir la lista de d'usuaris: " . mysqli_error($connect);
                     }
                 }
             } else {
