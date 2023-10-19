@@ -6,7 +6,7 @@
     <title>Formulari</title>
 </head>
 <body>
-<form method="POST" action="index.php">
+<form method="POST" action="basesdatos.php">
     <div>
         <label>ID Usuari</label><br>
         <input type="text" name="user_id">
@@ -29,14 +29,14 @@
     </div>
     <div>
         <label>Rol</label><br>
-        <select name="rol">
-            <option value="Alumnat" selected>Alumnat</option>
-            <option value="Professorat">Professorat</option>
-
+        <select id = rol name="rol">
+            <option value="alumnat" selected>alumnat</option>
+            <option value="professorat">professorat</option>
+          </select>
     </div>
     <div>
         <label>Active</label><br>
-        <input type="checkbox" name="active">
+        <input type="checkbox" name="avtive">
     </div>
     <input type="submit" value="Submit">
 </form>

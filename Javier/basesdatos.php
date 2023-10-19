@@ -7,15 +7,15 @@
     //DEFINIM EL PORT
     define("DB_PORT",3306);
 
-    //RECOLLIM LES DADES DEL FORMULARI
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Recoge los datos del formulario
         $user_id = $_POST["user_id"];
         $name = $_POST["name"];
         $surname = $_POST["surname"];
         $password = $_POST["password"];
         $email = $_POST["email"];
+        $active = isset($_POST["active"]) ? 1 : 0; // Verifica si la casilla está marcada
         $rol = $_POST["rol"];
-        $active = isset($_POST["active"]) ? 1 : 0; // VERIFICA SI ESTA MARCAT
     }
 
     //CONNEXIÓ BBDD
@@ -28,17 +28,19 @@
     }
 
     else{
-        //FEM UN SELECT PER RETORNAR TOTS ELS USERS
-        $query = "INSERT INTO `1` (`user_id`, `name`, `surname`, `password`, `email`, `rol`, `active`) 
-        VALUES ('$user_id', '$name', '$surname', '$password', '$email', '$rol', '$active')";
-        
-        $user= mysqli_query($connect, $query);
-        if(!$user){
-            echo "Error resultat" . mysqli_error($connect);;
-        }else{
-            header('Location: resultat.php');
-        }
+        //FEM UNA SELECT PER RETORNAR TOTS ELS USERS
+        $query = "INSERT INTO `user`(`user_id`, `name`, `surname`, `password`, `email`, `active`, `rol`) 
+    VALUES ('$user_id','$name','$surname','$password','$email','$active','$rol')";;
+    
+    $usuario = mysqli_query($connect, $query);
+    
+    if (!$usuario) {
+        echo "Error en la consulta: " . mysqli_error($connect);
+    }else{
+        header('Location: resultat.php');
+    }
     }
 
     mysqli_close($connect);
+
 ?>

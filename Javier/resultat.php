@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +7,10 @@
 </head>
 <body>
     
-    <h1>INSERCCIÓ CORRECTE A LA BBDD USERS</h1>
-    
+    <h1>Tu has insertat usuari correcta</h1>
+
+
+
 
 </body>
 </html>
