@@ -5,19 +5,17 @@
 
     //INCLOUREM ELS ARXIUS AMB LES DADES DE CONNEXIO
     include "dbConf.php";
+    include "functions.php";
 
+
+    //AMB AQUESTA CONDICIO COMPROVEM SI S'HA FET LOGIN
+    if(isset($_SESSION["LoggedIn"])){
 
     echo "<h2>Hola ". $_SESSION["nom"]." ets un ".$_SESSION["rol"]."</h2>";
-    echo "<a href='mostraInfo.php'>Mostra informació</a> <a href='logout.php'>Desconectar</a>";
     
-    //Funcio Consulta Usuaris
-    function consultaUsuaris($connect, $query){
-        $llistaResult = mysqli_query($connect, $query);
-        
-        return $llistaResult;
-    }
-
-    //CONNEXIÓ BBDD
+    echo "<a href='mostraInfo.php?user_id=".$_SESSION["user_id"]."'>Mostra informació</a> <a href='logout.php'>Desconectar</a>";
+    
+    //CONNEXIÓ BBDDH 
     $connect = mysqli_connect(DB_HOST, DB_USER, DB_PSW, DB_NAME, DB_PORT);
 
     //CODI PER VERIFICAR LA CONNEXIÓ
@@ -26,7 +24,7 @@
         echo"Error de connexio: ".mysqli_connect_error();
     }
 
-    else{
+    else if($_SESSION["rol"]=="professorat"){
         //FEM UN ALTRE CONSULTA PER MOSTRAR LA LLISTA DE TOTS ELS USUARIS O NOMES FEM SELECT DEL NOM I COGNOM
         $llistaQuery = "SELECT `name`, `surname`, `email` FROM `user` WHERE `rol` = 'professorat'";
         $llistaResult = mysqli_query($connect, $llistaQuery);
@@ -45,4 +43,8 @@
                     }
     }
     mysqli_close($connect);
+    }else{
+        echo "<h2>No tens acces </h2>";
+        echo "<a href='Login.html'>Fes Login</a>";
+    }
 ?>

@@ -20,7 +20,7 @@
         echo "Error de conexión: " . mysqli_connect_error();
     } else {
         //FEM LA CONSULTA SQL PER BUSCAR L'USUARI PER BUSCAR AMB LES DADES EMAIL I PASSWORD PER FER LA VALIDACIÓ DEL LOGIN
-        $query = "SELECT `user_id`, `name`, `surname`, `email`, `password`, `rol` FROM `user` WHERE `email` = '$email' AND `password` = '$password'";
+        $query = "SELECT `user_id`, `name`, `surname`, `email`, `password`, `rol` ,`active` FROM `user` WHERE `email` = '$email' AND `password` = '$password'";
         $result = mysqli_query($connect, $query);
 
         if (!$result) {
@@ -35,7 +35,6 @@
                 $_SESSION["user_id"]=$user["user_id"];
 
                 header('Location: index.php');
-
                 } else {
                     header('Location: Login.html');
                 }
